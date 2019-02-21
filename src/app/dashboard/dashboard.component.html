@@ -1,0 +1,188 @@
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<div style="width:100%;">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <h1 class="navbar-brand" style="color: #ffffff !important">Catalog Management</h1>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- <div style="float:left; width:80% ;"> -->
+  <!-- <div class="upper-pane">
+
+  <h1> Catalog Management tool </h1>
+ </div> -->
+
+  <div class="container col-md-offset-4">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="alert alert-danger" *ngIf="error">
+          <strong>Danger!</strong>{{message}}
+        </div>
+        <div class="alert alert-success" *ngIf="successResponse">
+          <strong>{{message}}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container col-md-offset-4" *ngIf="dashboard">
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Customer:</label>
+
+          <select id="category" [(ngModel)]="custSelected" class="form-control">
+            <option *ngFor="let cust of Customer" [value]="cust.custId">{{cust.custName}}</option>
+          </select>
+
+          <!-- <br>
+                    Selected value is : {{custSelected}} -->
+
+        </div>
+
+      </div>
+    </div>  
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Enviornment:</label>
+
+          <select id="env" [(ngModel)]="envSelected" class="form-control" (change)="getUserinstanceDetails()">
+            <option *ngFor="let env of Env" [value]="env.env_id">{{env.env_name}}</option>
+          </select>
+
+          <!-- <br>
+                  Selected value is : {{custSelected}} -->
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Username :</label>
+          <input type="text" id="username" class="form-control" [(ngModel)]="username" readonly=true>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>API key :</label>
+          <input type="text" id="apikey" class="form-control" [(ngModel)]="apikey" readonly=true>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>API Gateway URL :</label>
+          <input type="text" id="url" class="form-control" [(ngModel)]="url" readonly=true>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="col-md-offset-2">
+          <button type="submit" class="btn btn-primary mb-2" (click)="navigateToOperation()">Submit</button>&nbsp;&nbsp;
+          <button type="reset" class="btn btn-primary mb-2">Reset</button>&nbsp;&nbsp;
+          <button type="submit" class="btn btn-primary mb-2" (click)="addCustomers()">Add Customer</button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class="container col-md-offset-4" *ngIf="addCustomer">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Customer :</label>
+          <input type="text" id="customer" class="form-control" [(ngModel)]="addcustomer">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Enviornment :</label>
+          <input type="text" id="env" class="form-control" [(ngModel)]="addenviornment">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>Username :</label>
+          <input type="text" id="username" class="form-control" [(ngModel)]="addusername">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>API key :</label>
+          <input type="text" id="apikey" class="form-control" [(ngModel)]="addapikey">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>API Gateway URL :</label>
+          <input type="text" id="url" class="form-control" [(ngModel)]="addurl">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="col-md-offset-4">
+          <button type="submit" class="btn btn-primary mb-2" (click)="addCustomerDtls()">Add</button>&nbsp;&nbsp;
+          <button type="reset" class="btn btn-primary mb-2">Reset</button>&nbsp;&nbsp;
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- <div style="float:right; width:20% ;"> -->
+  <!-- <div class="alert alert-danger" *ngIf="error">
+            <strong>Danger!</strong>{{message}}
+          </div>
+          <div class="alert alert-success" *ngIf="successResponse">
+            <strong>{{message}}</strong> 
+          </div>  -->
+</div>
+<!-- </div> -->
+
+<div *ngIf="operationNav">
+  <app-operation></app-operation>
+
+</div>
+
+

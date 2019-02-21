@@ -1,0 +1,170 @@
+<form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+<div class="container col-md-offset-4">
+      
+  <div class="row">
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label>Select Provider:</label>
+           
+                  <select id="provider" [(ngModel)]="providerSelected" class="form-control" name="prov" #prov="ngModel">
+                         <option *ngFor="let Provider of Provider" [value]="Provider" (click)="changeProvider()" >{{Provider}}</option>
+                    </select>
+                    <div [hidden]="prov.valid || prov.pristine" class="alert alert-danger">Provider Required</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-7">
+                <label>Git location:</label>
+                <input type="text" id="gitloc" class="form-control" [(ngModel)]="gitloc" name="gitloc">
+
+            </div>
+            <div class="col-sm-5">
+                <label>Tag:</label>
+                <input type="text" id="tag" class="form-control" [(ngModel)]="tag" name="tag">
+            </div>
+          </div>
+         </div>
+ </div>
+
+<div class="" *ngIf="icdCntainer">
+ <div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>ICD IP:</label>
+         
+          <input type="text" id="ip" class="form-control" [(ngModel)]="ipSelected" name="ip" #ip="ngModel" required>
+          <div [hidden]="ip.valid || ip.pristine"  class="alert alert-danger">
+                IP is required
+     </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>Select Category:</label>
+         
+          <select id="category" [(ngModel)]="categorySelected" class="form-control" name="category">
+              <option *ngFor="let category of category" [value]="category" (click)="changeCategory()" >{{category}}</option>
+         </select>
+</div>
+</div>
+</div>
+
+<div class="row" *ngIf="pvtdiv">
+    <div class="col-sm-6">
+        <div class="form-group">
+          <label>Private:</label>
+         
+          <select id="category" [(ngModel)]="pvtSelected" class="form-control" name="category">
+              <option *ngFor="let pvt of privateDtls" [value]="pvt.fname" >{{pvt.fvalue}}</option>
+         </select>
+</div>
+</div>
+</div>
+
+<div class="row" *ngIf="traddiv">
+    <div class="col-sm-6">
+        <div class="form-group" >
+          <label>Traditional:</label>
+         
+          <select id="category" [(ngModel)]="tradSelected" class="form-control" name="tradSelected">
+            <option *ngFor="let trad of tradDtls" [value]="trad.fname" >{{trad.fvalue}}</option>
+         </select>
+</div>
+</div>
+</div>
+</div>
+
+<div *ngIf="vraCntainer">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label>Select Enviornment:</label>
+             
+              <select id="env" [(ngModel)]="envSelected" class="form-control" name="envSelected">
+                <option *ngFor="let env of envList" [value]="env.env_id" >{{env.env_name}}</option>
+           </select>
+    </div>
+    </div>
+    </div>
+
+</div>
+
+<div *ngIf="vraCntainer">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+              <label>Select Content Packs:</label>
+             
+              <!-- <select id="env" [(ngModel)]="envSelected" class="form-control">
+                <option *ngFor="let env of Env" [value]="env.env_id" >{{env.env_name}}</option>
+
+           </select> -->
+           <ng-multiselect-dropdown
+           [placeholder]="'custom placeholder'"
+           [data]="vraList"
+           [settings]="dropdownSettings"
+           (onSelect)="onItemSelect($event)"
+           (onSelectAll)="onSelectAll($event)" 
+         >
+         </ng-multiselect-dropdown>
+    </div>
+    </div>
+    </div>
+
+</div>
+
+
+<div *ngIf="icdTextAreaSection">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                    <textarea class="form-control rounded-0" id="icdtextarea" rows="3"  name="icdtextarea">{{textareaVal}}</textarea>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Operation Div  start-->
+
+<div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group"> 
+              <label>Select Operation Type:</label>
+             
+              <select id="optType" [(ngModel)]="optSelected" class="form-control" name="optSelected">
+                <option *ngFor="let dropdownList of dropdownList" [value]="dropdownList" (click)="changeOperation()">{{dropdownList}}</option>
+           </select>
+    </div>
+    </div>
+    </div>
+
+</div>
+
+<!-- Operation Div  start-->
+ 
+<!--Submit the details for process-->
+
+<div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group col-md-offset-4">
+
+                    <input type="submit" value="submit" class="btn btn-primary mb-2" name="submit" [disabled]="!heroForm.form.valid">
+                   </div> 
+            </div>
+        </div>
+</div>
+
+
+</div>
+</form>
